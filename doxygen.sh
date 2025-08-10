@@ -1,5 +1,8 @@
 #!/bin/bash
 # 2025 Bottiglione Julian <julian.bottiglione@epitech.eu>
+#   Note:   This script requires the following packages:
+#   graphviz
+#   doxygen
 
 if (( $# < 2 ));
 then
@@ -7,9 +10,6 @@ then
     exit 84
 fi
 
-#   Note:   This script requires the following packages:
-#   graphviz
-#   doxygen
 
 DOXYFILE_DEFAULT="DOXYFILE_ENCODING = UTF-8
 PROJECT_NAME = \"$1\"
@@ -49,13 +49,12 @@ fi
 doxygen ./doxygen/Doxyfile
 if [ $? != 0 ]
 then
-    echo "An error occured when generating the documentation..."
+    echo -e "${RED}An error occured when generating the documentation...${NC}"
     exit 84
 fi
 test -d doxygen/html/ && rm -r doxygen/html/
 test -d doxygen/latex/ && rm -r doxygen/latex/
 mv -f html/ doxygen/
 mv -f latex/ doxygen/
-echo "Succesfuly generated the documentation !"
-echo "Look at index.html or class.png !"
+echo -e "${GREEN}Succesfuly generated the documentation !\nLook at doxygen/index.html or doxygen/class.png !${NC}"
 exit 0
